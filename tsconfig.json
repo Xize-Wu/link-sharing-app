@@ -20,6 +20,13 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
+  
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
+  },
+  
+  "types": ["node"],
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
