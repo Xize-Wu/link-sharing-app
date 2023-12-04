@@ -1,14 +1,30 @@
 import { ReactNode, createContext, useContext, useState } from "react"
-//fake server only.
-interface Database {
+//context for the fake server;
+
+interface User {
     id: number;
     email: string;
-    password: string;
+    password: string | undefined;
+    profile_picture: string | undefined;
+    first_name: string | undefined;
+    last_name: string | undefined;
+    profile_email: string | undefined;
+    link: Link[]
+}
+
+type LinkType = "GitHub" | "Dev.to" | "Frontend Mentor" | "Codewars" | "Twitter" | "freeCodeCamp" | "LinkedIn" | "GitLab" | "YouTube" | "Hashnode" | "Facebook" | "Twitch";
+
+interface Link {
+    type: LinkType;
+    address: string
 }
 
 interface DatabaseContextType {
-    data: Database[];
-    addToDatabase: (item: Database) => void;
+    data: User[];
+
+    addToUserDatabase: (item: User) => void;
+    addProfileToUser: (id: number, profile_picture: string, first_name: string, last_name: string, profile_email: string) => void;
+    addLinkToUser: (id: number, link: Link) => void;
     testFunction: () => string;
 }
 
@@ -20,20 +36,41 @@ const DatabaseContext = createContext<DatabaseContextType | undefined>(undefined
 
 function DatabaseProvider({ children }: DatabaseProviderProps) {
 
-    const [data, setData] = useState<Database[]>([]);
+    const [data, setData] = useState<User[]>([]);
 
-    const addToDatabase = (item: Database) => {
+    function addToUserDatabase(item: User) {
         setData((prevData) => [...prevData, item])
     }
 
-    function testFunction (){
+    function addProfileToUser(id: number, profile_picture: string, first_name: string, last_name: string, profile_email: string) {
+        setData((prevData) => {
+            return prevData.map((user) =>
+                user.id === id
+                    ? { ...user, profile_picture: profile_picture, first_name: first_name, last_name: last_name, profile_email: profile_email }
+                    : user
+            )
+        }
+        )
+    }
+
+    function addLinkToUser(id: number, link: Link) {
+        setData((prevData) => {
+            return prevData.map((user) =>
+                user.id === id ? { ...user, link: [...user.link, link] }
+                    : user
+            )
+        })
+    }
+
+    function testFunction() {
         return "Hello World"
     }
-    //const delete
 
     const contextValue: DatabaseContextType = {
         data,
-        addToDatabase,
+        addToUserDatabase,
+        addProfileToUser,
+        addLinkToUser,
         testFunction
     }
 
@@ -52,4 +89,4 @@ function useDatabase() {
     return context
 }
 
-export {DatabaseProvider, useDatabase}
+export { DatabaseProvider, useDatabase }
