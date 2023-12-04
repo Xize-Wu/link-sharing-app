@@ -36,7 +36,20 @@ const DatabaseContext = createContext<DatabaseContextType | undefined>(undefined
 
 function DatabaseProvider({ children }: DatabaseProviderProps) {
 
-    const [data, setData] = useState<User[]>([]);
+    const [data, setData] = useState<User[]>([
+        {
+            id: 1,
+            email: 'asterwu2@gmail.com',
+            password: '1',
+            profile_picture: 'profile.jpg',
+            first_name: 'Aster',
+            last_name: 'Wu',
+            profile_email: 'asterwu2@gmail.com',
+            link: [
+                { type: 'GitHub', address: 'https://github.com/xize-wu' },
+            ],
+        },
+    ]);
 
     function addToUserDatabase(item: User) {
         setData((prevData) => [...prevData, item])
