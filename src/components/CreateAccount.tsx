@@ -1,20 +1,20 @@
-import styled from "styled-components";
+// import React from "react";
 import LoginCreateButton from "../styles/LoginCreateButton";
+
+import styled from "styled-components";
 import { useDatabase } from "../contexts/DatabaseContext";
 
 const StyledContainer = styled.div`
-padding: 2px;
-width: 40em;
-border: 1px solid black;`
+padding: 2px;`
 
-function Login() {
+function CreateAccount() {
     const { testFunction } = useDatabase()
     const result = testFunction()
     return (
         <StyledContainer>
-            <LoginCreateButton bgColor="#633CFF" buttonText="Login" />
+            <LoginCreateButton bgColor="#633CFF" buttonText="Create new account" />
         </StyledContainer>
     )
 }
 
-export default Login
+export default CreateAccount
