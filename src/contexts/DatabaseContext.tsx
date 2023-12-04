@@ -19,9 +19,15 @@ interface Link {
     address: string
 }
 
+export interface LoginInfo {
+    email: string;
+    password: string;
+}
+
 interface DatabaseContextType {
     data: User[];
-
+    loginStatus: boolean;
+    loginFunction: (item: LoginInfo) => boolean
     addToUserDatabase: (item: User) => void;
     addProfileToUser: (id: number, profile_picture: string, first_name: string, last_name: string, profile_email: string) => void;
     addLinkToUser: (id: number, link: Link) => void;
@@ -50,6 +56,26 @@ function DatabaseProvider({ children }: DatabaseProviderProps) {
             ],
         },
     ]);
+
+    const [loginStatus, setLoginStatus] = useState<boolean>(false)
+
+    function loginFunction(item: LoginInfo) {
+        console.log('this is data!!!')
+        console.log(data)
+        for (const user of data) {
+            console.log("this is user!!!")
+            console.log(user.email)
+            console.log(item.email)
+            if (user.email === item.email && user.password === item.password) {
+                setLoginStatus(true)
+                console.log("TRUE!")
+                return true
+            }
+
+        }
+        console.log("not logged in!");
+        return false
+    }
 
     function addToUserDatabase(item: User) {
         setData((prevData) => [...prevData, item])
@@ -81,6 +107,8 @@ function DatabaseProvider({ children }: DatabaseProviderProps) {
 
     const contextValue: DatabaseContextType = {
         data,
+        loginStatus,
+        loginFunction,
         addToUserDatabase,
         addProfileToUser,
         addLinkToUser,

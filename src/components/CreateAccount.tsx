@@ -12,7 +12,7 @@ function CreateAccount() {
     const result = testFunction()
     return (
         <StyledContainer>
-            <LoginCreateButton bgColor="#633CFF" buttonText="Create new account" />
+            {/* <LoginCreateButton bgColor="#633CFF" buttonText="Create new account " onClick=""/> */}
         </StyledContainer>
     )
 }

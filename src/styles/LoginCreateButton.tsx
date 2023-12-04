@@ -1,8 +1,10 @@
 import styled from 'styled-components';
+import { useDatabase } from "../contexts/DatabaseContext";
 
 interface LoginCreateButtonProps {
-  bgColor?: string;
-  buttonText?: string; // Define buttonText prop
+  bgColor: string;
+  buttonText: string;
+  onClick: (item: {})=>boolean;
 }
 
 const StyledButton = styled.button<LoginCreateButtonProps>`
@@ -18,8 +20,8 @@ const StyledButton = styled.button<LoginCreateButtonProps>`
   font-family: 'Instrument Sans', sans-serif;
 `;
 
-function LoginCreateButton({ bgColor, buttonText }: LoginCreateButtonProps) {
-  return <StyledButton bgColor={bgColor}>{buttonText}</StyledButton>;
+function LoginCreateButton({ bgColor, buttonText, onClick}: LoginCreateButtonProps) {
+  return <StyledButton  bgColor={bgColor} onClick={onClick}>{buttonText} </StyledButton>;
 }
 
 export default LoginCreateButton;
