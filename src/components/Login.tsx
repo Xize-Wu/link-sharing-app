@@ -9,9 +9,7 @@ width: 40em;
 border: 1px solid black;`
 
 function Login() {
-    const { loginFunction, testFunction } = useDatabase()
-    const result = testFunction()
-    
+    const { loginFunction } = useDatabase()    
     interface LoginState {
         email: string;
         password: string;
@@ -25,7 +23,6 @@ function Login() {
 
     return (
         <StyledContainer>
-            {result}
             <div>Login</div>
             <div>Add your details below to get back into the app</div>
             <div>
