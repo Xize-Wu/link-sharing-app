@@ -27,7 +27,7 @@ export interface LoginInfo {
 interface DatabaseContextType {
     data: User[];
     loginStatus: boolean;
-    loginFunction: (item: LoginInfo) => boolean
+    loginFunction: (item: LoginInfo) => void;
     addToUserDatabase: (item: User) => void;
     addProfileToUser: (id: number, profile_picture: string, first_name: string, last_name: string, profile_email: string) => void;
     addLinkToUser: (id: number, link: Link) => void;
@@ -69,12 +69,10 @@ function DatabaseProvider({ children }: DatabaseProviderProps) {
             if (user.email === item.email && user.password === item.password) {
                 setLoginStatus(true)
                 console.log("TRUE!")
-                return true
             }
 
         }
         console.log("not logged in!");
-        return false
     }
 
     function addToUserDatabase(item: User) {
