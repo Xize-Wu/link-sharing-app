@@ -1,5 +1,5 @@
 // import React from "react";
-import LoginCreateButton from "../styles/LoginCreateButton";
+import LoginCreateButton from "../ui/LoginCreateButton";
 
 import styled from "styled-components";
 import { useDatabase } from "../contexts/DatabaseContext";
