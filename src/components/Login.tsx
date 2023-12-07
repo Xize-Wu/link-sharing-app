@@ -7,8 +7,6 @@ import InputField from "../ui/InputField";
 import LoginCreateButton from "../ui/LoginCreateButton";
 
 const StyledContainer = styled.div`
-  padding: 2px;
-  width: 40em;
   border: 1px solid black;
 `;
 
@@ -17,9 +15,14 @@ interface LoginState {
   password: string;
 }
 
-function Login() {
-  const { loginFunction } = useDatabase();
+interface LoginProps {
+  switchComponent: () => void;
+  colorsVar: object
+}
 
+function Login(children: LoginProps) {
+  const { loginFunction } = useDatabase();
+  const { switchComponent, colorsVar } = children;
   const [login, setLogin] = useState<LoginState>({ email: "", password: "" });
 
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -51,32 +54,31 @@ function Login() {
       value: login.email,
       placeholder: "e.g. alex@email.com",
       onChange: handleEmailChange,
-    },{
-        label: "Password",
-        name: "password",
-        type:"password",
-        value:login.password,
-        placeholder:"Enter your password",
-        onChange:handelPasswordChange,
-    }
+    },
+    {
+      label: "Password",
+      name: "password",
+      type: "password",
+      value: login.password,
+      placeholder: "Enter your password",
+      onChange: handelPasswordChange,
+    },
   ];
   return (
     <StyledContainer>
-      <div>Login</div>
-      <div>Add your details below to get back into the app</div>
-      {
-        inputFields.map((field, index) => (
-            <InputField
-              key={index}
-              label={field.label}
-              name={field.name}
-              type={field.type}
-              value={field.value}
-              placeholder={field.placeholder}
-              onChange={field.onChange}
-            />
-          ))
-      }
+      <h1>Login</h1>
+      <div className="notes">Add your details below to get back into the app</div>
+      {inputFields.map((field, index) => (
+        <InputField
+          key={index}
+          label={field.label}
+          name={field.name}
+          type={field.type}
+          value={field.value}
+          placeholder={field.placeholder}
+          onChange={field.onChange}
+        />
+      ))}
       <LoginCreateButton
         bgColor="#633CFF"
         color="white"
@@ -86,7 +88,7 @@ function Login() {
       </LoginCreateButton>
       <div>
         <div>Don't have an account?</div>
-        <div>Create account</div>
+        <div onClick={switchComponent}>Create account</div>
       </div>
     </StyledContainer>
   );

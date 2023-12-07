@@ -68,11 +68,11 @@ function DatabaseProvider({ children }: DatabaseProviderProps) {
             console.log(item.email)
             if (user.email === item.email && user.password === item.password) {
                 setLoginStatus(true)
-                console.log("TRUE!")
+                // console.log("TRUE!")
             }
 
         }
-        console.log("not logged in!");
+        // console.log("not logged in!");
     }
 
     function addToUserDatabase(item: User) {

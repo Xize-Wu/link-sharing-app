@@ -8,8 +8,6 @@ import { useContext } from "react";
 import e from "express";
 
 const StyledContainer = styled.div`
-  padding: 2px;
-  width: 40em;
   border: 1px solid black;
 `;
 
@@ -18,8 +16,14 @@ interface CreateAccountState {
   password: string;
 }
 
-function CreateAccount() {
+interface CreateAccountProps {
+    switchComponent: () => void;
+  }
+  
+
+function CreateAccount(child:CreateAccountProps) {
   const { addToUserDatabase } = useDatabase();
+  const {switchComponent} = child
 
   const [createAccount, setCreateAccount] = useState<CreateAccountState>({
     email: "",
@@ -112,6 +116,10 @@ function CreateAccount() {
       >
         Create new account
       </LoginCreateButton>
+      <div>
+        <div>Already have an account?</div>
+        <div onClick={switchComponent}>Login</div>
+      </div>
     </StyledContainer>
   );
 }

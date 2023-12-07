@@ -1,17 +1,106 @@
+import React, { useState } from "react";
+import { styled, css } from "styled-components";
+
 import Login from "./Login";
 import CreateAccount from "./CreateAccount";
-import { styled, css } from "styled-components";
 import { DatabaseProvider, useDatabase } from "../contexts/DatabaseContext";
-const StyledLayout = styled.div`
-  background-color: beige;
+
+const colorsVar: { [key: string]: string } = {
+  primary: "#633CFF",
+  secondary: "#BEADFF",
+  disabled: "#EFEBFF",
+  parent_component_background: "#FAFAFA",
+  header: "333333",
+  error: "#FF3939",
+  notes: "#D9D9D9",
+  child_component_background: "#FFFFFF",
+};
+
+const sharedStyles = css`
+  background-color: ${colorsVar.child_component_background};
+  color: ${colorsVar.header};
+  font-size: 16px;
+  padding: 2px;
+
+  h1 {
+    font-size: 32px;
+    line-height: 150%;
+    font-weight: bold;
+    padding-left: 15px;
+  }
+
+  .notes {
+  }
 `;
+
+const StyledLayout = styled.div`
+  padding-left: 20px;
+  width: 80%;
+
+  header {
+    display: flex;
+    align-items: center;
+    font-size: 32px;
+    line-height: 150%;
+    font-weight: bold;
+    color: ${colorsVar.header};
+  }
+
+  .dev-links {
+    padding-left: 0.2em;
+  }
+`;
+
+const StyledComponent = styled.div`
+  ${sharedStyles}
+`;
+
 function AppLayout() {
+  const { loginStatus } = useDatabase();
+  const [authComponent, setAuthCompnent] = useState<"login" | "register">(
+    "login"
+  );
+
+  function handleSetAuthComponent(): void {
+    if (authComponent === "login") {
+      setAuthCompnent("register");
+    } else setAuthCompnent("login");
+    console.log(authComponent);
+  }
   return (
     <StyledLayout>
-      <header></header>
+      <header>
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="none"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill={colorsVar.primary}
+              d="M8.523 11.72a.749.749 0 0 1 0 1.063l-.371.371A3.751 3.751 0 1 1 2.847 7.85l1.507-1.506A3.75 3.75 0 0 1 9.5 6.188a.753.753 0 0 1-1 1.125 2.25 2.25 0 0 0-3.086.091L3.908 8.91a2.25 2.25 0 0 0 3.183 3.183l.37-.371a.748.748 0 0 1 1.062 0Zm4.63-8.874a3.756 3.756 0 0 0-5.305 0l-.371.37A.751.751 0 1 0 8.539 4.28l.372-.37a2.25 2.25 0 0 1 3.182 3.182l-1.507 1.507a2.25 2.25 0 0 1-3.086.09.753.753 0 0 0-1 1.125 3.75 3.75 0 0 0 5.144-.152l1.507-1.507a3.756 3.756 0 0 0 .002-5.307v-.001Z"
+            />
+          </svg>
+        </div>
+        <span className="dev-links">devlinks</span>
+      </header>
       <main>
-        <Login />
-        <CreateAccount />
+        {loginStatus ? (
+          <>Place your actual front page here</>
+        ) : (
+          <StyledComponent>
+            {authComponent === "login" ? (
+              <Login
+                switchComponent={handleSetAuthComponent}
+                colorsVar={colorsVar}
+              />
+            ) : (
+              <CreateAccount switchComponent={handleSetAuthComponent} />
+            )}
+          </StyledComponent>
+        )}
       </main>
       <footer>This is a footer</footer>
     </StyledLayout>
