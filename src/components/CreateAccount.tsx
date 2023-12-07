@@ -1,20 +1,119 @@
 // import React from "react";
 import LoginCreateButton from "../ui/LoginCreateButton";
-
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useDatabase } from "../contexts/DatabaseContext";
+import InputField from "../ui/InputField";
+import { useContext } from "react";
+import e from "express";
 
 const StyledContainer = styled.div`
-padding: 2px;`
+  padding: 2px;
+  width: 40em;
+  border: 1px solid black;
+`;
 
-function CreateAccount() {
-    const { testFunction } = useDatabase()
-    const result = testFunction()
-    return (
-        <StyledContainer>
-            {/* <LoginCreateButton bgColor="#633CFF" buttonText="Create new account " onClick=""/> */}
-        </StyledContainer>
-    )
+interface CreateAccountState {
+  email: string;
+  password: string;
 }
 
-export default CreateAccount
+function CreateAccount() {
+  const { addToUserDatabase } = useDatabase();
+
+  const [createAccount, setCreateAccount] = useState<CreateAccountState>({
+    email: "",
+    password: "",
+  });
+  function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>): void {
+    setCreateAccount({ ...createAccount, email: e.target.value });
+  }
+  function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>): void {
+    setCreateAccount({ ...createAccount, password: e.target.value });
+  }
+
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  function handleConfirmPasswordChange(
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void {
+    setConfirmPassword(e.target.value);
+  }
+
+  function handleCreateNewAccountClick () {
+
+    const accountInfo = {...createAccount, 
+        id:1,
+        profile_picture:"", 
+        first_name:"", 
+        last_name:"",
+        profile_email:"",
+        link:[]}
+
+    addToUserDatabase(accountInfo);
+  }
+
+  type inputFieldsConfig = {
+    label: string;
+    name: string;
+    type: string;
+    value: string;
+    placeholder: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  }[];
+
+  const inputFields: inputFieldsConfig = [
+    {
+      label: "Email address",
+      name: "email",
+      type: "email",
+      value: createAccount.email,
+      placeholder: "e.g. alex@email.com",
+      onChange: handleEmailChange,
+    },
+    {
+      label: "Create password",
+      name: "password",
+      type: "password",
+      value: createAccount.password,
+      placeholder: "At least 8 characters",
+      onChange: handlePasswordChange,
+    },
+    {
+      label: "Confirm password",
+      name: "confirm-password",
+      type: "password",
+      value: confirmPassword,
+      placeholder: "At least 8 characters",
+      onChange: handleConfirmPasswordChange,
+    },
+  ];
+
+  return (
+    <StyledContainer>
+      <div>Create account</div>
+      <div>Let's get you started sharing your links!</div>
+      {
+        inputFields.map((field, index) => (
+            <InputField
+              key={index}
+              label={field.label}
+              name={field.name}
+              type={field.type}
+              value={field.value}
+              placeholder={field.placeholder}
+              onChange={field.onChange}
+            />
+          ))
+      }
+      <LoginCreateButton
+        bgColor="#633CFF"
+        color="white"
+        onClick={handleCreateNewAccountClick}
+      >
+        Create new account
+      </LoginCreateButton>
+    </StyledContainer>
+  );
+}
+
+export default CreateAccount;
