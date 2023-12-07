@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   :root {
     --primary-background-color: #FAFAFA;
+    --header-text-color: #333333;
   }
 
   @font-face {
@@ -19,9 +20,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 export default GlobalStyle
-// // later in your app's render method
-// <React.Fragment>
-//   <Navigation />
-//   <OtherImportantTopLevelComponentStuff />
-//   <GlobalStyle />
-// </React.Fragment>
+/*
+const colorsVar: { [key: string]: string } = {
+  primary: "#633CFF",
+  secondary: "#BEADFF",
+  disabled: "#EFEBFF",
+  parent_component_background: "#FAFAFA",
+  header: "333333",
+  error: "#FF3939",
+  notes: "#D9D9D9",
+  child_component_background: "#FFFFFF",
+};
+*/

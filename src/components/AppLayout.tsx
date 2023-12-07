@@ -5,30 +5,22 @@ import Login from "./Login";
 import CreateAccount from "./CreateAccount";
 import { DatabaseProvider, useDatabase } from "../contexts/DatabaseContext";
 
-const colorsVar: { [key: string]: string } = {
-  primary: "#633CFF",
-  secondary: "#BEADFF",
-  disabled: "#EFEBFF",
-  parent_component_background: "#FAFAFA",
-  header: "333333",
-  error: "#FF3939",
-  notes: "#D9D9D9",
-  child_component_background: "#FFFFFF",
-};
+// const colorsVar: { [key: string]: string } = {
+//   primary: "#633CFF",
+//   secondary: "#BEADFF",
+//   disabled: "#EFEBFF",
+//   parent_component_background: "#FAFAFA",
+//   header: "333333",
+//   error: "#FF3939",
+//   notes: "#D9D9D9",
+//   child_component_background: "#FFFFFF",
+// };
 
 const sharedStyles = css`
-  background-color: ${colorsVar.child_component_background};
-  color: ${colorsVar.header};
+  background-color: var(--layout-background-color);
+  color: var(--header-text-color);
   font-size: 16px;
   padding: 2px;
-
-  h1 {
-    font-size: 32px;
-    line-height: 150%;
-    font-weight: bold;
-    padding-left: 15px;
-  }
-
   .notes {
   }
 `;
@@ -36,24 +28,31 @@ const sharedStyles = css`
 const StyledLayout = styled.div`
   padding-left: 20px;
   width: 80%;
+`;
 
-  header {
-    display: flex;
-    align-items: center;
-    font-size: 32px;
-    line-height: 150%;
-    font-weight: bold;
-    color: ${colorsVar.header};
-  }
+const StyledHeader = styled.header`
+  display: flex;
+  align-items: center;
+  font-size: 32px;
+  line-height: 150%;
+  font-weight: bold;
+  color: var(--header-text-color);
+`;
 
-  .dev-links {
-    padding-left: 0.2em;
-  }
+const StyledDevLink = styled.span`
+  padding-left: 0.2em;
 `;
 
 const StyledComponent = styled.div`
   ${sharedStyles}
 `;
+
+// const StyledH1 = styled.h1`
+//   font-size: 32px;
+//   line-height: 150%;
+//   font-weight: bold;
+//   padding-left: 15px;
+// `;
 
 function AppLayout() {
   const { loginStatus } = useDatabase();
@@ -69,7 +68,7 @@ function AppLayout() {
   }
   return (
     <StyledLayout>
-      <header>
+      <StyledHeader>
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -79,13 +78,13 @@ function AppLayout() {
             viewBox="0 0 16 16"
           >
             <path
-              fill={colorsVar.primary}
+              fill= "#633CFF"
               d="M8.523 11.72a.749.749 0 0 1 0 1.063l-.371.371A3.751 3.751 0 1 1 2.847 7.85l1.507-1.506A3.75 3.75 0 0 1 9.5 6.188a.753.753 0 0 1-1 1.125 2.25 2.25 0 0 0-3.086.091L3.908 8.91a2.25 2.25 0 0 0 3.183 3.183l.37-.371a.748.748 0 0 1 1.062 0Zm4.63-8.874a3.756 3.756 0 0 0-5.305 0l-.371.37A.751.751 0 1 0 8.539 4.28l.372-.37a2.25 2.25 0 0 1 3.182 3.182l-1.507 1.507a2.25 2.25 0 0 1-3.086.09.753.753 0 0 0-1 1.125 3.75 3.75 0 0 0 5.144-.152l1.507-1.507a3.756 3.756 0 0 0 .002-5.307v-.001Z"
             />
           </svg>
         </div>
-        <span className="dev-links">devlinks</span>
-      </header>
+        <StyledDevLink>devlinks</StyledDevLink>
+      </StyledHeader>
       <main>
         {loginStatus ? (
           <>Place your actual front page here</>
@@ -94,7 +93,6 @@ function AppLayout() {
             {authComponent === "login" ? (
               <Login
                 switchComponent={handleSetAuthComponent}
-                colorsVar={colorsVar}
               />
             ) : (
               <CreateAccount switchComponent={handleSetAuthComponent} />

@@ -17,12 +17,20 @@ interface LoginState {
 
 interface LoginProps {
   switchComponent: () => void;
-  colorsVar: object
 }
 
-function Login(children: LoginProps) {
+type inputFieldsConfig = {
+  label: string;
+  name: string;
+  type: string;
+  value: string;
+  placeholder: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}[];
+
+function Login(props: LoginProps) {
   const { loginFunction } = useDatabase();
-  const { switchComponent, colorsVar } = children;
+  const { switchComponent } = props;
   const [login, setLogin] = useState<LoginState>({ email: "", password: "" });
 
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -36,15 +44,6 @@ function Login(children: LoginProps) {
   const handleLoginClick = () => {
     loginFunction(login);
   };
-
-  type inputFieldsConfig = {
-    label: string;
-    name: string;
-    type: string;
-    value: string;
-    placeholder: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  }[];
 
   const inputFields: inputFieldsConfig = [
     {
@@ -64,6 +63,7 @@ function Login(children: LoginProps) {
       onChange: handelPasswordChange,
     },
   ];
+
   return (
     <StyledContainer>
       <h1>Login</h1>
