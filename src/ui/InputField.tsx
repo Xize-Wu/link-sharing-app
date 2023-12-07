@@ -20,7 +20,7 @@ function InputField ({label, name,  type, value, placeholder, onChange}: InputFi
 
         <input 
             name = {name}
-            id = {name}
+            key = {name}
             type={type}
             value={value}
             placeholder={placeholder}
