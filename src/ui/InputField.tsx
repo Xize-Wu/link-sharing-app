@@ -10,9 +10,8 @@ interface InputFieldProps {
 
 }
 
-// interface StyledInputFieldProps {
-//     $bgColor:
-// }
+const StyledInputField = styled.div`
+`
 
 function InputField ({label, name,  type, value, placeholder, onChange}: InputFieldProps){
     return <div>

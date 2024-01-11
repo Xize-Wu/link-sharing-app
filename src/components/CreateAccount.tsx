@@ -29,9 +29,11 @@ function CreateAccount(child:CreateAccountProps) {
     email: "",
     password: "",
   });
+
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>): void {
     setCreateAccount({ ...createAccount, email: e.target.value });
   }
+  
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>): void {
     setCreateAccount({ ...createAccount, password: e.target.value });
   }

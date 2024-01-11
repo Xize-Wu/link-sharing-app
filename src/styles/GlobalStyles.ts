@@ -3,6 +3,8 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
   :root {
     --primary-background-color: #FAFAFA;
+    --layout-background-color: #FFFFFF;
+    --primary-color:#633CFF;
     --header-text-color: #333333;
   }
 
@@ -20,15 +22,3 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 export default GlobalStyle
-/*
-const colorsVar: { [key: string]: string } = {
-  primary: "#633CFF",
-  secondary: "#BEADFF",
-  disabled: "#EFEBFF",
-  parent_component_background: "#FAFAFA",
-  header: "333333",
-  error: "#FF3939",
-  notes: "#D9D9D9",
-  child_component_background: "#FFFFFF",
-};
-*/

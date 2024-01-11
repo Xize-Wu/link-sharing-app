@@ -5,17 +5,6 @@ import Login from "./Login";
 import CreateAccount from "./CreateAccount";
 import { DatabaseProvider, useDatabase } from "../contexts/DatabaseContext";
 
-// const colorsVar: { [key: string]: string } = {
-//   primary: "#633CFF",
-//   secondary: "#BEADFF",
-//   disabled: "#EFEBFF",
-//   parent_component_background: "#FAFAFA",
-//   header: "333333",
-//   error: "#FF3939",
-//   notes: "#D9D9D9",
-//   child_component_background: "#FFFFFF",
-// };
-
 const sharedStyles = css`
   background-color: var(--layout-background-color);
   color: var(--header-text-color);
@@ -47,13 +36,6 @@ const StyledComponent = styled.div`
   ${sharedStyles}
 `;
 
-// const StyledH1 = styled.h1`
-//   font-size: 32px;
-//   line-height: 150%;
-//   font-weight: bold;
-//   padding-left: 15px;
-// `;
-
 function AppLayout() {
   const { loginStatus } = useDatabase();
   const [authComponent, setAuthCompnent] = useState<"login" | "register">(
@@ -66,6 +48,7 @@ function AppLayout() {
     } else setAuthCompnent("login");
     console.log(authComponent);
   }
+  
   return (
     <StyledLayout>
       <StyledHeader>
@@ -100,7 +83,6 @@ function AppLayout() {
           </StyledComponent>
         )}
       </main>
-      <footer>This is a footer</footer>
     </StyledLayout>
   );
 }
