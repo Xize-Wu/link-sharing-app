@@ -31,6 +31,7 @@ const StyledInputField = styled.div`
   }
 
   input {
+    outline: none;
     padding-left: 2rem;
     border: 1px solid var(--grey);
     border-radius: 4px;
