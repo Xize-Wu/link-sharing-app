@@ -7,7 +7,7 @@ import { DatabaseProvider, useDatabase } from "../contexts/DatabaseContext";
 
 const sharedStyles = css`
   background-color: var(--layout-background-color);
-  color: var(--header-text-color);
+  color: var(--black);
   font-size: 16px;
   padding: 2px;
   .notes {
@@ -25,7 +25,7 @@ const StyledHeader = styled.header`
   font-size: 32px;
   line-height: 150%;
   font-weight: bold;
-  color: var(--header-text-color);
+  color: var(--black);
 `;
 
 const StyledDevLink = styled.span`
