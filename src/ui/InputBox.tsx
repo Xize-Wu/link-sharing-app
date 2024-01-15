@@ -1,4 +1,21 @@
-export default function InputBox (){
+interface InputBoxProps {
+  label: "Email Address" | "Password" | "Create password" | "Confirm password";
+  name: string;
+  type: string;
+  value: string;
+  placeholder: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+
+export default function InputBox({
+  label,
+  name,
+  type,
+  value,
+  placeholder,
+  onChange,
+}: InputBoxProps) {
     return (
         <div>
         {label === "Email Address" ? (

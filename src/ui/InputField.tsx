@@ -63,7 +63,7 @@ function InputField({
   return (
     <StyledInputField>
       <label htmlFor={name}>{label}</label>
-      <InputBox/>
+      <InputBox label={label} name={name} type={type} value={value} placeholder={placeholder} onChange={onChange}/>
     </StyledInputField>
   );
 }
