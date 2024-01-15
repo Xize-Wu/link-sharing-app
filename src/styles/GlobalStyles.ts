@@ -23,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
   body{
     background-color: var(--light-grey);
     font-family: 'InstrumentSans', sans-serif;
+    margin: 0px;
   }
 `;
 export default GlobalStyle

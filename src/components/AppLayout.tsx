@@ -12,8 +12,6 @@ const sharedStyles = css`
   color: var(--black);
   font-size: 16px;
   padding: 2px;
-  .notes {
-  }
 `;
 
 const StyledLayout = styled.div`

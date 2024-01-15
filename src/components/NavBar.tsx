@@ -1,28 +1,24 @@
 import { styled, css } from "styled-components";
 
-const SVGStyles = css`
-  svg {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* This property ensures the aspect ratio is maintained */
-  }
-`;
-
 const StyledNavBar = styled.div`
-  width: 100%;
+  padding: 1rem;
   height: 2.5rem; /* Adjusted to 2.5rem for consistency */
   background-color: var(--white);
 
   display: flex;
   justify-content: space-between;
 
-  ${SVGStyles}
+  svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* This property ensures the aspect ratio is maintained */
+  }
 `;
 const StyledPreviewButton = styled.div`
   height: 2.5rem;
   width: 3.5rem;
   border: 1px solid var(--dark-purple);
-  border-radius: 4px;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,7 +33,18 @@ const StyledToggleGroup = styled.div`
   display: flex;
   align-items: center;
 `;
-const StyledToggleButton = styled.button``;
+const StyledToggleButton = styled.button`
+  height: 2.5rem;
+  width: 5rem;
+  border-radius: 8px;
+  border: 0px;
+  svg {
+    height: 75%;
+    width: 37.5%;
+  }
+
+  background-color: var(--white);
+`;
 export default function NavBar() {
   return (
     <StyledNavBar>
