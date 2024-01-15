@@ -1,15 +1,22 @@
-import NavBar from "./NavBar"
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
+import styled from "styled-components";
 
-import { Provider } from 'react-redux';
-import store from "../redux/store";
+import NavBar from "./NavBar";
+import Customize from "../ui/Customize";
+import Profile from "../ui/Profile";
 
-export default function Dashboard(){
-    return (
-        <>
-        <NavBar/>
-        {store}
-        <div>Dashboard</div>
-        
-        </>
-    )
+const StyledDashBoard = styled.div`
+
+`
+export default function Dashboard() {
+  const toggleValue = useSelector((state: RootState) => state.toggle.value);
+
+  return (
+    <>
+      {toggleValue !== "preview" && <NavBar />}
+      {toggleValue === "customize" && <Customize />}
+      {toggleValue === "profile" && <Profile />}
+    </>
+  );
 }
