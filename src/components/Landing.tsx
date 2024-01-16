@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { styled, css } from "styled-components";
-import { DatabaseProvider, useDatabase } from "../contexts/DatabaseContext";
 
 import Login from "../ui/Landing/Login";
 import CreateAccount from "../ui/Landing/CreateAccount";
-import LandingHeader from "../ui/LandingHeader";
+import LandingHeader from "../ui/Landing/LandingHeader";
 
 const sharedStyles = css`
   background-color: var(--layout-background-color);
@@ -19,7 +18,6 @@ const StyledComponent = styled.div`
 
 
 export default function Landing() {
-  const { loginStatus } = useDatabase();
   const [authComponent, setAuthCompnent] = useState<"login" | "register">(
     "login"
   );

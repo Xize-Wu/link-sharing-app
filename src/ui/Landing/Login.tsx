@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 import { useDatabase } from "../../contexts/DatabaseContext";
 
-import InputField from "../InputField";
-import LoginCreateButton from "../LoginCreateButton";
+import InputField from "./InputField";
+import LoginCreateButton from "./LoginCreateButton";
 
 const StyledContainer = styled.div`
   border: 1px solid black;
