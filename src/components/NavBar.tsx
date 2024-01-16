@@ -1,6 +1,8 @@
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setToggle } from "../redux/toggleSlice";
 import { styled, css } from "styled-components";
+
+import { RootState } from "../redux/store";
 
 const StyledNavBar = styled.div`
   padding: 1rem;
@@ -37,7 +39,7 @@ const StyledToggleGroup = styled.div`
   display: flex;
   align-items: center;
 `;
-const StyledToggleButton = styled.button`
+const sharedButtonStyle = css`
   height: 2.5rem;
   width: 5rem;
   border-radius: 8px;
@@ -46,16 +48,41 @@ const StyledToggleButton = styled.button`
     height: 75%;
     width: 37.5%;
   }
-
   background-color: var(--white);
+`;
+
+const StyledCustomizeButton = styled.button`
+  ${sharedButtonStyle}
+  background-color: ${(props) =>
+    props.togglevalue === "customize" ? "#EFEBFF" : "#FFFFFF"};
+  path{
+    fill: ${(props) =>
+      props.togglevalue === "customize" ? "#633CFF" : "#737373"};
+  }
+`;
+
+const StyledProfileButton = styled.button`
+  ${sharedButtonStyle}
+  background-color: ${(props) => 
+     props.togglevalue === "profile" ? "#EFEBFF" : "#FFFFFF"};
+     path{
+      fill: ${(props) =>
+        props.togglevalue === "profile" ? "#633CFF" : "#737373"};
+    }
+  
 `;
 
 export default function NavBar() {
   const dispatch = useDispatch();
 
-  const handleButtonClick = (toggleValue: "customize" | "profile" | "preview") => {
-    dispatch(setToggle(toggleValue))
-  }
+  const handleButtonClick = (
+    toggleValue: "customize" | "profile" | "preview"
+  ) => {
+    dispatch(setToggle(toggleValue));
+  };
+
+  const toggleValue = useSelector((state: RootState) => state.toggle.value);
+
   return (
     <StyledNavBar>
       <div>
@@ -75,7 +102,9 @@ export default function NavBar() {
         </svg>
       </div>
       <StyledToggleGroup>
-      <StyledToggleButton onClick={() => handleButtonClick("customize")}>
+        <StyledCustomizeButton
+          onClick={() => handleButtonClick("customize")}
+          togglevalue={toggleValue}        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -88,8 +117,11 @@ export default function NavBar() {
               d="M8.523 11.72a.749.749 0 0 1 0 1.063l-.371.371A3.751 3.751 0 1 1 2.847 7.85l1.507-1.506A3.75 3.75 0 0 1 9.5 6.188a.753.753 0 0 1-1 1.125 2.25 2.25 0 0 0-3.086.091L3.908 8.91a2.25 2.25 0 0 0 3.183 3.183l.37-.371a.748.748 0 0 1 1.062 0Zm4.63-8.874a3.756 3.756 0 0 0-5.305 0l-.371.37A.751.751 0 1 0 8.539 4.28l.372-.37a2.25 2.25 0 0 1 3.182 3.182l-1.507 1.507a2.25 2.25 0 0 1-3.086.09.753.753 0 0 0-1 1.125 3.75 3.75 0 0 0 5.144-.152l1.507-1.507a3.756 3.756 0 0 0 .002-5.307v-.001Z"
             />
           </svg>
-        </StyledToggleButton>
-        <StyledToggleButton onClick={() => handleButtonClick("profile" )}>
+        </StyledCustomizeButton>
+        <StyledProfileButton
+          onClick={() => handleButtonClick("profile")}
+          togglevalue={toggleValue}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="21"
@@ -102,9 +134,9 @@ export default function NavBar() {
               d="M10.5 1.563A8.437 8.437 0 1 0 18.938 10 8.447 8.447 0 0 0 10.5 1.562ZM6.716 15.357a4.688 4.688 0 0 1 7.568 0 6.54 6.54 0 0 1-7.568 0Zm1.596-5.982a2.188 2.188 0 1 1 4.376 0 2.188 2.188 0 0 1-4.376 0Zm7.344 4.683a6.523 6.523 0 0 0-2.265-1.83 4.062 4.062 0 1 0-5.782 0 6.522 6.522 0 0 0-2.265 1.83 6.562 6.562 0 1 1 10.304 0h.008Z"
             />
           </svg>
-        </StyledToggleButton>
+        </StyledProfileButton>
       </StyledToggleGroup>
-      <StyledPreviewButton  onClick={() => handleButtonClick("preview" )}>
+      <StyledPreviewButton onClick={() => handleButtonClick("preview")}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
