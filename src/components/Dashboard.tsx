@@ -7,7 +7,12 @@ import Customize from "../ui/Customize";
 import Profile from "../ui/Profile";
 
 const StyledDashBoard = styled.div`
-  width: 95%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
 `
 export default function Dashboard() {
   const toggleValue = useSelector((state: RootState) => state.toggle.value);

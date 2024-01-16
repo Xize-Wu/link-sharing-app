@@ -1,8 +1,8 @@
 import { styled, css } from 'styled-components';
-
-interface LoginCreateButtonProps {
+interface MainButtonProps {
   bgColor: string;
   color: string;
+  border: string;
   children:React.ReactNode;
   onClick: () => void;
 }
@@ -10,25 +10,26 @@ interface LoginCreateButtonProps {
 interface StyledButtonProps {
   $bgColor: string;
   $color: string;
+  $border: string;
 }
 
 const StyledButton = styled.button<StyledButtonProps>`
   ${(props) => css`background-color: ${props.$bgColor};
-  color:${props.$color}`};
-  width: 15em;
-  height: 2.5em;
-  border: none;
-  // padding-left: 10px;
-  // padding-right: 10px;
+  color:${props.$color};
+  border: ${props.$border};`};
+  width: 18rem;
+  height: 3.2rem;
+  font-size: 16px;
+  font-weight: bold;  
   border-radius: 6px; 
   cursor: pointer; 
   font-family: 'Instrument Sans', sans-serif;
 `;
 
-function LoginCreateButton({ children, bgColor, color, onClick }: LoginCreateButtonProps) {
-  return <StyledButton $bgColor={bgColor} $color={color} onClick={onClick}>
+function MainButton({ children, bgColor, color, border, onClick }: MainButtonProps) {
+  return <StyledButton $bgColor={bgColor} $color={color} $border={border} onClick={onClick}>
     {children}
   </StyledButton>
 }
 
-export default LoginCreateButton;
+export default MainButton;

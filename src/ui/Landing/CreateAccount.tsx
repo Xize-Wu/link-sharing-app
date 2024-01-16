@@ -1,5 +1,5 @@
 // import React from "react";
-import LoginCreateButton from "./LoginCreateButton";
+import MainButton from "../MainButton";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useDatabase } from "../../contexts/DatabaseContext";
@@ -111,13 +111,13 @@ function CreateAccount(child:CreateAccountProps) {
             />
           ))
       }
-      <LoginCreateButton
+      <MainButton
         bgColor="#633CFF"
         color="white"
         onClick={handleCreateNewAccountClick}
       >
         Create new account
-      </LoginCreateButton>
+      </MainButton>
       <div>
         <div>Already have an account?</div>
         <div onClick={switchComponent}>Login</div>

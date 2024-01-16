@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useDatabase } from "../../contexts/DatabaseContext";
 
 import InputField from "./InputField";
-import LoginCreateButton from "./LoginCreateButton";
+import MainButton from "../MainButton";
 
 const StyledContainer = styled.div`
   border: 1px solid black;
@@ -79,13 +79,14 @@ function Login(props: LoginProps) {
           onChange={field.onChange}
         />
       ))}
-      <LoginCreateButton
+      <MainButton
         bgColor="#633CFF"
         color="white"
+        border="none"
         onClick={handleLoginClick}
       >
         Login
-      </LoginCreateButton>
+      </MainButton>
       <div>
         <div>Don't have an account?</div>
         <div onClick={switchComponent}>Create account</div>

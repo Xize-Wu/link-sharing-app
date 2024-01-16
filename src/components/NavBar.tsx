@@ -6,16 +6,16 @@ import { RootState } from "../redux/store";
 
 const StyledNavBar = styled.div`
   padding: 1rem;
-  height: 2.5rem; /* Adjusted to 2.5rem for consistency */
+  height: 2.5rem; 
   background-color: var(--white);
+  width: 100vw;
 
   display: flex;
-  justify-content: space-between;
-
+  justify-content: space-around;
+  
   svg {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* This property ensures the aspect ratio is maintained */
   }
 `;
 const StyledPreviewButton = styled.button`
