@@ -1,9 +1,9 @@
 // import React from "react";
-import LoginCreateButton from "../ui/LoginCreateButton";
+import LoginCreateButton from "../LoginCreateButton";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useDatabase } from "../contexts/DatabaseContext";
-import InputField from "../ui/InputField";
+import { useDatabase } from "../../contexts/DatabaseContext";
+import InputField from "../InputField";
 import { useContext } from "react";
 import e from "express";
 

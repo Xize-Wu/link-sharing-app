@@ -1,10 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { useDatabase } from "../contexts/DatabaseContext";
+import { useDatabase } from "../../contexts/DatabaseContext";
 
-import InputField from "../ui/InputField";
-import LoginCreateButton from "../ui/LoginCreateButton";
+import InputField from "../InputField";
+import LoginCreateButton from "../LoginCreateButton";
 
 const StyledContainer = styled.div`
   border: 1px solid black;

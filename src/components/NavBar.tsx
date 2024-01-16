@@ -51,7 +51,10 @@ const sharedButtonStyle = css`
   background-color: var(--white);
 `;
 
-const StyledCustomizeButton = styled.button`
+interface StyledCustomizeButtonProps {
+  togglevalue: "customize" | "profile";
+}
+const StyledCustomizeButton = styled.button<StyledCustomizeButtonProps>`
   ${sharedButtonStyle}
   background-color: ${(props) =>
     props.togglevalue === "customize" ? "#EFEBFF" : "#FFFFFF"};
@@ -61,7 +64,7 @@ const StyledCustomizeButton = styled.button`
   }
 `;
 
-const StyledProfileButton = styled.button`
+const StyledProfileButton = styled.button<StyledCustomizeButtonProps>`
   ${sharedButtonStyle}
   background-color: ${(props) => 
      props.togglevalue === "profile" ? "#EFEBFF" : "#FFFFFF"};
