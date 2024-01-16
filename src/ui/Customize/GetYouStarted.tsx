@@ -21,7 +21,11 @@ const StyledHeading = styled.div`
   flex-direction: column;
   align-items: flex-start;
 `;
-const StyledDescription = styled.div``;
+const StyledDescription = styled.div`
+padding-left: 0.7rem;
+padding-right: 0.7rem;
+
+`;
 export default function GetYouStarted() {
   return (
     <StyledGetYouStarted>

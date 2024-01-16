@@ -5,6 +5,7 @@ import { User, Link, LinkType, LoginInfo } from "./types";
 interface DatabaseContextType {
     data: User[];
     loginStatus: boolean;
+    linkArray: Link[];
     loginFunction: (item: LoginInfo) => void;
     addToUserDatabase: (item: User) => void;
     addProfileToUser: (id: number, profile_picture: string, first_name: string, last_name: string, profile_email: string) => void;
@@ -35,12 +36,14 @@ function DatabaseProvider({ children }: DatabaseProviderProps) {
         },
     ]);
 
-    const [loginStatus, setLoginStatus] = useState<boolean>(false)
 
+    const [loginStatus, setLoginStatus] = useState<boolean>(false)
+    const [linkArray, setLinkArray] = useState<Link[]>([])
     function loginFunction(item: LoginInfo) {
         for (const user of data) {
             if (user.email === item.email && user.password === item.password) {
                 setLoginStatus(true)
+                setLinkArray(user.link)
             }
 
         }
@@ -77,6 +80,7 @@ function DatabaseProvider({ children }: DatabaseProviderProps) {
     const contextValue: DatabaseContextType = {
         data,
         loginStatus,
+        linkArray,
         loginFunction,
         addToUserDatabase,
         addProfileToUser,

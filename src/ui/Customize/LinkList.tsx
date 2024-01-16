@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import GetYouStarted from "./GetYouStarted";
+import { useDatabase } from "../../contexts/DatabaseContext";
 
 const StyledLinkList = styled.div`
   display: flex;
@@ -9,9 +10,10 @@ const StyledLinkList = styled.div`
 import MainButton from "../MainButton";
 
 export default function LinkList() {
+  const { loginStatus, linkArray } = useDatabase();
   return (
     <StyledLinkList>
-      <GetYouStarted />
+      {linkArray.length === 0? <GetYouStarted />:<>Test</>}
       <MainButton />
     </StyledLinkList>
   );
