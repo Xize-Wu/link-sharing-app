@@ -3,12 +3,13 @@ import MainButton from "../MainButton";
 const StyledGuide = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 0.5rem;
 `;
 
 const StyledHeading = styled.div`
   color: var(--black);
   font-weight: bold;
-  font-size: 32px;
+  font-size: 26px;
   line-height: 150%;
 `;
 

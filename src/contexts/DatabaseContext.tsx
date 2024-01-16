@@ -1,28 +1,6 @@
 import { ReactNode, createContext, useContext, useState } from "react"
-//context for the fake server;
+import { User, Link, LinkType, LoginInfo } from "./types";
 
-interface User {
-    id: number;
-    email: string;
-    password: string | undefined;
-    profile_picture: string | undefined;
-    first_name: string | undefined;
-    last_name: string | undefined;
-    profile_email: string | undefined;
-    link: Link[]
-}
-
-type LinkType = "GitHub" | "Dev.to" | "Frontend Mentor" | "Codewars" | "Twitter" | "freeCodeCamp" | "LinkedIn" | "GitLab" | "YouTube" | "Hashnode" | "Facebook" | "Twitch";
-
-interface Link {
-    type: LinkType;
-    address: string
-}
-
-export interface LoginInfo {
-    email: string;
-    password: string;
-}
 
 interface DatabaseContextType {
     data: User[];
@@ -60,19 +38,12 @@ function DatabaseProvider({ children }: DatabaseProviderProps) {
     const [loginStatus, setLoginStatus] = useState<boolean>(false)
 
     function loginFunction(item: LoginInfo) {
-        console.log('this is data!!!')
-        console.log(data)
         for (const user of data) {
-            console.log("this is user!!!")
-            console.log(user.email)
-            console.log(item.email)
             if (user.email === item.email && user.password === item.password) {
                 setLoginStatus(true)
-                // console.log("TRUE!")
             }
 
         }
-        // console.log("not logged in!");
     }
 
     function addToUserDatabase(item: User) {
