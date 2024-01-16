@@ -1,5 +1,5 @@
-// Customize.tsx
 import styled from "styled-components";
+import { useState } from "react";
 
 import Guide from "./Customize/Guide";
 import { SharedDashboardStyles } from "../styles/SharedStyles";
@@ -9,9 +9,15 @@ const StyledCustomize = styled.div`
 `;
 
 export default function Customize() {
+  const [count, setCount] = useState<number>(0);
+
+  function addNewLink (){
+    setCount(prev => prev + 1);
+  }
+
   return (
     <StyledCustomize>
-      <Guide />
+      <Guide count={count} addNewLink={addNewLink}/>
     </StyledCustomize>
   );
 }
