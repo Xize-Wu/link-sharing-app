@@ -1,17 +1,45 @@
 import styled from "styled-components";
 
 import { LinkInterface } from "../../contexts/types";
-const StyledLinkComponent = styled.div``;
+const StyledLinkComponent = styled.div`
+padding-bottom: 0.5rem;
+padding-top: 0.5rem;
+width: 100%;
 
+`;
+
+const StyledLabel = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const StyledIndex = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+`;
+const StyledSvg = styled.div`
+  padding-right: 0.5rem;
+  padding-bottom: 0.2rem;
+`;
 const StyledInput = styled.input`
   padding: 8px;
   margin-bottom: 10px;
 `;
 
+const StyledInputField = styled.div`
+  display:flex;
+  flex-direction: column;
+  padding-top: 0.75rem;
+`
+
+const StyledRemove = styled.div``;
+
 interface LinkProps {
   index: number;
-  platform: string | undefined; 
-  address: string | undefined;  
+  platform: string | undefined;
+  address: string | undefined;
   onChange: (field: Partial<LinkInterface>) => void;
   onRemove: () => void;
 }
@@ -20,19 +48,26 @@ export default function LinkComponent(props: LinkProps) {
   const { index, platform, address, onChange, onRemove } = props;
   return (
     <StyledLinkComponent>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="12"
-        height="6"
-        fill="none"
-        viewBox="0 0 12 6"
-      >
-        <path fill="#737373" d="M0 0h12v1H0zM0 5h12v1H0z" />
-      </svg>
-      Link #{index}
-      <div onClick={() => onRemove()}>remove</div>
+      <StyledLabel>
+        <StyledIndex>
+          <StyledSvg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="6"
+              fill="none"
+              viewBox="0 0 12 6"
+            >
+              <path fill="#737373" d="M0 0h12v1H0zM0 5h12v1H0z" />
+            </svg>
+          </StyledSvg>
+          Link #{index}
+        </StyledIndex>
+
+        <StyledRemove onClick={() => onRemove()}>remove</StyledRemove>
+      </StyledLabel>
       <form>
-        <div>
+        <StyledInputField>
           Platform
           <StyledInput
             type="text"
@@ -41,8 +76,8 @@ export default function LinkComponent(props: LinkProps) {
               onChange({ index: index, platform: e.target.value })
             }
           />
-        </div>
-        <div>
+        </StyledInputField>
+        <StyledInputField>
           Link
           <StyledInput
             type="text"
@@ -51,7 +86,7 @@ export default function LinkComponent(props: LinkProps) {
               onChange({ index: index, address: e.target.value })
             }
           />
-        </div>
+        </StyledInputField>
       </form>
     </StyledLinkComponent>
   );

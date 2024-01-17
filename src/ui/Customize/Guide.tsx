@@ -50,7 +50,6 @@ export default function Guide(props: GuideProps) {
           + Add New Link
         </MainButton>
       </StyledButtonContainer>
-      {count}
     </StyledGuide>
   );
 }
