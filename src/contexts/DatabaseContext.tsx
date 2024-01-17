@@ -1,15 +1,15 @@
 import { ReactNode, createContext, useContext, useState } from "react"
-import { User, Link, LinkType, LoginInfo } from "./types";
+import { User, LinkInterface, LoginInfo } from "./types";
 
 
 interface DatabaseContextType {
     data: User[];
     loginStatus: boolean;
-    linkArray: Link[];
+    linkArray: LinkInterface[];
     loginFunction: (item: LoginInfo) => void;
     addToUserDatabase: (item: User) => void;
     addProfileToUser: (id: number, profile_picture: string, first_name: string, last_name: string, profile_email: string) => void;
-    addLinkToUser: (id: number, link: Link) => void;
+    addLinkToUser: (id: number, link: LinkInterface) => void;
     testFunction: () => string;
 }
 
@@ -31,19 +31,21 @@ function DatabaseProvider({ children }: DatabaseProviderProps) {
             last_name: 'Wu',
             profile_email: 'asterwu2@gmail.com',
             link: [
-                { type: 'GitHub', address: 'https://github.com/xize-wu' },
+                { index: 1, platform: 'GitHub', address: 'https://github.com/xize-wu' },
+                { index: 2, platform: 'Codewars', address: 'https://www.codewars.com/users/Xize-Wu'}
             ],
         },
     ]);
 
 
     const [loginStatus, setLoginStatus] = useState<boolean>(false)
-    const [linkArray, setLinkArray] = useState<Link[]>([])
+    const [linkArray, setLinkArray] = useState<LinkInterface[]>([])
     function loginFunction(item: LoginInfo) {
         for (const user of data) {
             if (user.email === item.email && user.password === item.password) {
                 setLoginStatus(true)
                 setLinkArray(user.link)
+                console.log(user.link)
             }
 
         }
@@ -64,7 +66,7 @@ function DatabaseProvider({ children }: DatabaseProviderProps) {
         )
     }
 
-    function addLinkToUser(id: number, link: Link) {
+    function addLinkToUser(id: number, link: LinkInterface) {
         setData((prevData) => {
             return prevData.map((user) =>
                 user.id === id ? { ...user, link: [...user.link, link] }

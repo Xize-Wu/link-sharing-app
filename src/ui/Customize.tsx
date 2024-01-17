@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { useState } from "react";
 
 import Guide from "./Customize/Guide";
-import LinkList from "./Customize/LinkList";
 import { SharedDashboardStyles } from "../styles/SharedStyles";
+import MyLinks from "./Customize/MyLinks";
 
 const StyledCustomize = styled.div`
   ${SharedDashboardStyles}
@@ -19,7 +19,7 @@ export default function Customize() {
   return (
     <StyledCustomize>
       <Guide count={count} addNewLink={addNewLink}/>
-      <LinkList/>
+      <MyLinks count={count}/>
     </StyledCustomize>
   );
 }
