@@ -1,24 +1,36 @@
-import { useState, ChangeEvent } from "react";
+import { useState } from 'react';
+import { LinkInterface } from '../contexts/types';
 
-interface InitialStateType {
-  [key: string]: any;
+interface FormState extends Array<LinkInterface> {}
+
+interface FormActions {
+  formData: FormState;
+  handleChange: (index: number, field: Partial<LinkInterface>) => void;
+  handleSubmit: () => void;
 }
 
-const useForm = (initialState: InitialStateType) => {
-  const [formData, setFormData] = useState<InitialStateType>(initialState);
+const useForm = (initialState: FormState): FormActions => {
+  const [formData, setFormData] = useState<FormState>(initialState);
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement>
-  ) => {
-    const {name, value} = e.target
-    setFormData((prev) =>({
-        ... prev, [name]: value,
-    }));
+  const handleChange = (index: number, field: Partial<LinkInterface>) => {
+    setFormData((prevData) => {
+      console.log("function triggered", prevData)
+      console.log("this is your props", field)
+      const updatedData = prevData.map((item, i) => (i === (index -1) ? { ...item, ...field } : item));
+      console.log(updatedData)
+      return updatedData;
+    });
   };
+
+  const handleSubmit = () => {
+    console.log('Form submitted:', formData);
+  };
+
   return {
     formData,
-    handleChange
-  }
+    handleChange,
+    handleSubmit,
+  };
 };
 
 export default useForm;
