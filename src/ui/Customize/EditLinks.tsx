@@ -9,7 +9,7 @@ interface EditLinksProps {
 }
 
 export default function EditLinks(props: EditLinksProps) {
-  const { loginStatus, linkArray } = useDatabase();
+  const { linkArray } = useDatabase();
 
   return (
     <StyledEditLinks>

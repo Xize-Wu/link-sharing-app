@@ -45,7 +45,6 @@ function DatabaseProvider({ children }: DatabaseProviderProps) {
             if (user.email === item.email && user.password === item.password) {
                 setLoginStatus(true)
                 setLinkArray(user.link)
-                console.log(user.link)
             }
 
         }

@@ -26,7 +26,6 @@ export default function Landing() {
     if (authComponent === "login") {
       setAuthCompnent("register");
     } else setAuthCompnent("login");
-    console.log(authComponent);
   }
 
   return (
