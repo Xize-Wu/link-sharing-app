@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useEffect, useState } from 'react';
 
 import { LinkInterface } from "../../contexts/types";
 const StyledLinkComponent = styled.div``;
@@ -14,21 +13,11 @@ interface LinkProps {
   platform: string | undefined; 
   address: string | undefined;  
   onChange: (field: Partial<LinkInterface>) => void;
-
+  onRemove: () => void;
 }
 
 export default function LinkComponent(props: LinkProps) {
-  const { index, platform, address, onChange } = props;
-
-  const [localPlatform, setLocalPlatform] = useState(platform);
-  const [localAddress, setLocalAddress] = useState(address);
-
-
-  useEffect(() => {
-    setLocalPlatform(platform);
-    setLocalAddress(address);
-  }, [platform, address]);
-
+  const { index, platform, address, onChange, onRemove } = props;
   return (
     <StyledLinkComponent>
       <svg
@@ -41,12 +30,13 @@ export default function LinkComponent(props: LinkProps) {
         <path fill="#737373" d="M0 0h12v1H0zM0 5h12v1H0z" />
       </svg>
       Link #{index}
+      <div onClick={() => onRemove()}>remove</div>
       <form>
         <div>
           Platform
           <StyledInput
             type="text"
-            value={localPlatform}
+            value={platform}
             onChange={(e) =>
               onChange({ index: index, platform: e.target.value })
             }

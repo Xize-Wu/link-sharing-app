@@ -6,6 +6,7 @@ interface FormState extends Array<LinkInterface> {}
 interface FormActions {
   formData: FormState;
   handleChange: (index: number, field: Partial<LinkInterface>) => void;
+  handleRemove: (index: number) => void;
   handleSubmit: () => void;
 }
 
@@ -13,14 +14,20 @@ const useForm = (initialState: FormState): FormActions => {
   const [formData, setFormData] = useState<FormState>(initialState);
 
   const handleChange = (index: number, field: Partial<LinkInterface>) => {
-    setFormData((prevData) => {
-      console.log("function triggered", prevData)
-      console.log("this is your props", field)
-      const updatedData = prevData.map((item, i) => (i === (index -1) ? { ...item, ...field } : item));
+    setFormData((prev) => {
+      const updatedData = prev.map((item, i) => (i === (index -1) ? { ...item, ...field } : item));
+      return updatedData;
+    });
+  };
+ 
+  const handleRemove = (index: number) => {
+    setFormData((prev) => {
+      const updatedData = prev.filter((item) => item["index"] !== index);
       console.log(updatedData)
       return updatedData;
     });
   };
+  
 
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
@@ -30,6 +37,7 @@ const useForm = (initialState: FormState): FormActions => {
     formData,
     handleChange,
     handleSubmit,
+    handleRemove,
   };
 };
 

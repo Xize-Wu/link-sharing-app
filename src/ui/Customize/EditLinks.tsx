@@ -11,7 +11,7 @@ interface EditLinksProps {
 export default function EditLinks(props: EditLinksProps) {
   const { linkArray } = useDatabase();
 
-  const { formData, handleChange, handleSubmit } = useForm(linkArray || []);
+  const { formData, handleChange, handleRemove, handleSubmit } = useForm(linkArray || []);
 
   if (!linkArray) {
     return <></>;
@@ -26,6 +26,7 @@ export default function EditLinks(props: EditLinksProps) {
             platform={item.platform}
             address={item.address}
             onChange={(field) => handleChange(item.index, field)}
+            onRemove={()=>handleRemove(item.index)}
             />
         ))}
       </StyledEditLinks>
