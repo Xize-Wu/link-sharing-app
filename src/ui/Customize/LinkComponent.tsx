@@ -2,10 +2,9 @@ import styled from "styled-components";
 
 import { LinkInterface } from "../../contexts/types";
 const StyledLinkComponent = styled.div`
-padding-bottom: 0.5rem;
-padding-top: 0.5rem;
-width: 100%;
-
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  width: 100%;
 `;
 
 const StyledLabel = styled.div`
@@ -29,10 +28,10 @@ const StyledInput = styled.input`
 `;
 
 const StyledInputField = styled.div`
-  display:flex;
+  display: flex;
   flex-direction: column;
   padding-top: 0.75rem;
-`
+`;
 
 const StyledRemove = styled.div``;
 

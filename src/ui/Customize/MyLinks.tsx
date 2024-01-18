@@ -1,8 +1,8 @@
 import styled from "styled-components";
-
+import { useState } from "react";
 import { useDatabase } from "../../contexts/DatabaseContext";
-import useForm from "../../hooks/useForm";
 
+import { LinkInterface } from "../../contexts/types";
 import GetYouStarted from "./GetYouStarted";
 import EditLinks from "./EditLinks";
 import MainButton from "../MainButton";
@@ -29,7 +29,23 @@ const StyledLinkArr= styled.div`
 `
 export default function MyLinks(props:MyLinksProps) {
   const { loginStatus, linkArray } = useDatabase();
-  const { formData, handleChange, handleSubmit, handleRemove } = useForm(linkArray || []);
+  const [formData, setFormData] = useState<LinkInterface[]>(linkArray);
+
+  const handleChange = (index: number, field: Partial<LinkInterface>) => {
+    const updatedData = formData.map((item, i) => (i === (index -1) ? { ...item, ...field } : item))
+    setFormData(updatedData);
+  };
+ 
+  const handleRemove = (index: number) => {
+    const updatedData = formData.filter((item) => item["index"] !== index);
+    setFormData(updatedData);
+  };
+  
+
+  const handleSubmit = () => {
+    console.log('Form submitted:', formData);
+  };
+
   const startingIndex = formData.length + 1 || 0;
 
   const linkComponents = Array.from({ length: props.count }, (_, index) => (
