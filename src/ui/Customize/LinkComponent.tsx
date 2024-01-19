@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { LinkInterface } from "../../contexts/types";
+import { LinkInterface } from "../../redux/types";
 const StyledLinkComponent = styled.div`
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;

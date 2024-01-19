@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "@reduxjs/toolkit/query";
-import { LinkInterface } from "../contexts/types";
+import { RootState } from "./store";
+import { LinkInterface } from "./types";
+
 
 interface StateProps {
   user: {

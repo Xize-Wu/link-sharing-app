@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LinkInterface } from '../contexts/types';
+import { LinkInterface } from '../redux/types';
 
 interface FormState extends Array<LinkInterface> {}
 

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useDatabase } from "../../contexts/DatabaseContext";
 
-import { LinkInterface } from "../../contexts/types";
+import { LinkInterface } from "../../redux/types";
 import GetYouStarted from "./GetYouStarted";
 import EditLinks from "./EditLinks";
 import MainButton from "../MainButton";
@@ -28,7 +28,7 @@ const StyledLinkArr= styled.div`
   width: 100%;
 `
 export default function MyLinks(props:MyLinksProps) {
-  const { loginStatus, linkArray } = useDatabase();
+  const { linkArray } = useDatabase();
   const [formData, setFormData] = useState<LinkInterface[]>(linkArray);
 
   const handleChange = (index: number, field: Partial<LinkInterface>) => {
@@ -41,7 +41,6 @@ export default function MyLinks(props:MyLinksProps) {
     setFormData(updatedData);
   };
   
-
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
   };
