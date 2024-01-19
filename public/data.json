@@ -1,0 +1,24 @@
+[
+    {
+      "id": 1,
+      "email": "asterwu2@gmail.com",
+      "password": "1",
+      "profile_picture": "profile.jpg",
+      "first_name": "Aster",
+      "last_name": "Wu",
+      "profile_email": "asterwu2@gmail.com",
+      "links": [
+        {
+          "index": 1,
+          "platform": "GitHub",
+          "address": "https://github.com/xize-wu"
+        },
+        {
+          "index": 2,
+          "platform": "Codewars",
+          "address": "https://www.codewars.com/users/Xize-Wu"
+        }
+      ]
+    }
+  ]
+  
