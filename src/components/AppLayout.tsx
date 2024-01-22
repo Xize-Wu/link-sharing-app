@@ -1,18 +1,29 @@
 import { styled } from "styled-components";
-
-import Landing from "./Landing";
-import Dashboard from "./Dashboard";
-import { useDatabase } from "../contexts/DatabaseContext";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getIsAuthenticated } from "../redux/authSlice";
 
 const StyledLayout = styled.main`
   width: 100%;
 `;
 
 function AppLayout() {
-  const { loginStatus } = useDatabase();
+  const navigate = useNavigate();
+  const isAuth = useSelector(getIsAuthenticated);
+
+  useEffect(
+    function (){
+      if(!isAuth){
+        navigate("/login")
+      }
+    }
+  )
 
   return (
-    <StyledLayout>{loginStatus ? <Dashboard /> : <Landing />}</StyledLayout>
+    <StyledLayout>
+      <Outlet/>
+    </StyledLayout>
   );
 }
 

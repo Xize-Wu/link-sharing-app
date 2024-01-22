@@ -12,8 +12,8 @@ const StyledDashBoard = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
 
-`
 export default function Dashboard() {
   const toggleValue = useSelector((state: RootState) => state.toggle.value);
 

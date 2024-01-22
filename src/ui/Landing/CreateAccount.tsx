@@ -1,11 +1,7 @@
-// import React from "react";
 import MainButton from "../MainButton";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useDatabase } from "../../contexts/DatabaseContext";
 import InputField from "./InputField";
-import { useContext } from "react";
-import e from "express";
 
 const StyledContainer = styled.div`
   border: 1px solid black;
@@ -17,13 +13,11 @@ interface CreateAccountState {
 }
 
 interface CreateAccountProps {
-    switchComponent: () => void;
-  }
-  
+  switchComponent: () => void;
+}
 
-function CreateAccount(child:CreateAccountProps) {
-  const { addToUserDatabase } = useDatabase();
-  const {switchComponent} = child
+function CreateAccount(child: CreateAccountProps) {
+  const { switchComponent } = child;
 
   const [createAccount, setCreateAccount] = useState<CreateAccountState>({
     email: "",
@@ -33,7 +27,7 @@ function CreateAccount(child:CreateAccountProps) {
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>): void {
     setCreateAccount({ ...createAccount, email: e.target.value });
   }
-  
+
   function handlePasswordChange(e: React.ChangeEvent<HTMLInputElement>): void {
     setCreateAccount({ ...createAccount, password: e.target.value });
   }
@@ -45,17 +39,18 @@ function CreateAccount(child:CreateAccountProps) {
     setConfirmPassword(e.target.value);
   }
 
-  function handleCreateNewAccountClick () {
+  function handleCreateNewAccountClick() {
+    const accountInfo = {
+      ...createAccount,
+      id: 1,
+      profile_picture: "",
+      first_name: "",
+      last_name: "",
+      profile_email: "",
+      link: [],
+    };
 
-    const accountInfo = {...createAccount, 
-        id:1,
-        profile_picture:"", 
-        first_name:"", 
-        last_name:"",
-        profile_email:"",
-        link:[]}
-
-    addToUserDatabase(accountInfo);
+    // addToUserDatabase(accountInfo);
   }
 
   type inputFieldsConfig = {
@@ -98,19 +93,17 @@ function CreateAccount(child:CreateAccountProps) {
     <StyledContainer>
       <div>Create account</div>
       <div>Let's get you started sharing your links!</div>
-      {
-        inputFields.map((field, index) => (
-            <InputField
-              key={index}
-              label={field.label}
-              name={field.name}
-              type={field.type}
-              value={field.value}
-              placeholder={field.placeholder}
-              onChange={field.onChange}
-            />
-          ))
-      }
+      {inputFields.map((field, index) => (
+        <InputField
+          key={index}
+          label={field.label}
+          name={field.name}
+          type={field.type}
+          value={field.value}
+          placeholder={field.placeholder}
+          onChange={field.onChange}
+        />
+      ))}
       <MainButton
         bgColor="#633CFF"
         color="white"

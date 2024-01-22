@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import MainButton from "../MainButton";
+import { addLink, getLinks } from "../../redux/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 const StyledGuide = styled.div`
   display: flex;
   flex-direction: column;
@@ -26,12 +29,21 @@ const StyledButtonContainer = styled.div`
 
   padding-top: 1rem;
 `;
-interface GuideProps {
-  count: number;
-  addNewLink: () => void;
-}
-export default function Guide(props: GuideProps) {
-  const {count, addNewLink} = props;
+
+export default function Guide() {
+  const dispatch = useDispatch();
+  const links = useSelector(getLinks);
+
+  function handleAddLink() {
+    dispatch(
+      addLink({
+        index: links.length + 1,
+        platform: "Facebook",
+        address: "https://www.facebook.com/",
+      })
+    );
+  }
+
 
   return (
     <StyledGuide>
@@ -45,7 +57,7 @@ export default function Guide(props: GuideProps) {
           bgColor="var(--white)"
           color="var(--dark-purple)"
           border="1px solid var(--dark-purple)"
-          onClick={addNewLink}
+          onClick={handleAddLink}
         >
           + Add New Link
         </MainButton>

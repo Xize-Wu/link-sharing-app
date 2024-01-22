@@ -1,10 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { useDatabase } from "../../contexts/DatabaseContext";
-
 import InputField from "./InputField";
 import MainButton from "../MainButton";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../redux/authSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getIsAuthenticated } from "../../redux/authSlice";
 
 const StyledContainer = styled.div`
   border: 1px solid black;
@@ -13,10 +16,6 @@ const StyledContainer = styled.div`
 interface LoginState {
   email: string;
   password: string;
-}
-
-interface LoginProps {
-  switchComponent: () => void;
 }
 
 type inputFieldsConfig = {
@@ -28,21 +27,34 @@ type inputFieldsConfig = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }[];
 
-function Login(props: LoginProps) {
-  const { loginFunction } = useDatabase();
-  const { switchComponent } = props;
-  const [login, setLogin] = useState<LoginState>({ email: "", password: "" });
+function Login() {
+  const dispatch = useDispatch();
+
+  const [logininfo, setLogin] = useState<LoginState>({
+    email: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+  const isAuth = useSelector(getIsAuthenticated);
+
+  useEffect(
+    function () {
+      if (isAuth) navigate("/", { replace: true });
+    },
+    [isAuth, navigate]
+  );
 
   function handleEmailChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setLogin({ ...login, email: e.target.value });
+    setLogin({ ...logininfo, email: e.target.value });
   }
 
   function handelPasswordChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setLogin({ ...login, password: e.target.value });
+    setLogin({ ...logininfo, password: e.target.value });
   }
 
   const handleLoginClick = () => {
-    loginFunction(login);
+    dispatch(login(logininfo));
   };
 
   const inputFields: inputFieldsConfig = [
@@ -50,7 +62,7 @@ function Login(props: LoginProps) {
       label: "Email Address",
       name: "email-address",
       type: "email",
-      value: login.email,
+      value: logininfo.email,
       placeholder: "e.g. alex@email.com",
       onChange: handleEmailChange,
     },
@@ -58,7 +70,7 @@ function Login(props: LoginProps) {
       label: "Password",
       name: "password",
       type: "password",
-      value: login.password,
+      value: logininfo.password,
       placeholder: "Enter your password",
       onChange: handelPasswordChange,
     },
@@ -67,7 +79,9 @@ function Login(props: LoginProps) {
   return (
     <StyledContainer>
       <h1>Login</h1>
-      <div className="notes">Add your details below to get back into the app</div>
+      <div className="notes">
+        Add your details below to get back into the app
+      </div>
       {inputFields.map((field, index) => (
         <InputField
           key={index}
@@ -89,7 +103,8 @@ function Login(props: LoginProps) {
       </MainButton>
       <div>
         <div>Don't have an account?</div>
-        <div onClick={switchComponent}>Create account</div>
+        {/* switchComponent */}
+        <div onClick={() => {}}>Create account</div>
       </div>
     </StyledContainer>
   );

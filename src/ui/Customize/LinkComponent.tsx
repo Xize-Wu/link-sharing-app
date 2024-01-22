@@ -1,6 +1,7 @@
 import styled from "styled-components";
-
-import { LinkInterface } from "../../redux/types";
+import { useDispatch } from "react-redux";
+import { updateLinkAddress, updateLinkPlatform } from "../../redux/authSlice";
+  
 const StyledLinkComponent = styled.div`
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;
@@ -39,12 +40,23 @@ interface LinkProps {
   index: number;
   platform: string | undefined;
   address: string | undefined;
-  onChange: (field: Partial<LinkInterface>) => void;
-  onRemove: () => void;
 }
 
 export default function LinkComponent(props: LinkProps) {
-  const { index, platform, address, onChange, onRemove } = props;
+  const { index, platform, address } = props;
+
+  const dispatch = useDispatch();
+
+  function handlePlatformChange(e: React.ChangeEvent<HTMLInputElement>) {
+    console.log(e.target.value);
+    dispatch(updateLinkPlatform({ index: index, platform: e.target.value }));
+  }
+
+  function handleAddressChange(e: React.ChangeEvent<HTMLInputElement>) {
+    console.log(e.target.value);
+    dispatch(updateLinkAddress({ index: index, address: e.target.value }));
+  }
+
   return (
     <StyledLinkComponent>
       <StyledLabel>
@@ -63,7 +75,7 @@ export default function LinkComponent(props: LinkProps) {
           Link #{index}
         </StyledIndex>
 
-        <StyledRemove onClick={() => onRemove()}>remove</StyledRemove>
+        <StyledRemove onClick={() => {}}>remove</StyledRemove>
       </StyledLabel>
       <form>
         <StyledInputField>
@@ -71,9 +83,7 @@ export default function LinkComponent(props: LinkProps) {
           <StyledInput
             type="text"
             value={platform}
-            onChange={(e) =>
-              onChange({ index: index, platform: e.target.value })
-            }
+            onChange={handlePlatformChange}
           />
         </StyledInputField>
         <StyledInputField>
@@ -81,12 +91,11 @@ export default function LinkComponent(props: LinkProps) {
           <StyledInput
             type="text"
             value={address}
-            onChange={(e) =>
-              onChange({ index: index, address: e.target.value })
-            }
+            onChange={handleAddressChange}
           />
         </StyledInputField>
       </form>
     </StyledLinkComponent>
   );
+
 }
