@@ -5,7 +5,9 @@ import { styled, css } from "styled-components";
 import { RootState } from "../redux/store";
 
 const StyledNavBar = styled.div`
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
   height: 2.5rem; 
   background-color: var(--white);
   width: 100vw;

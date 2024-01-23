@@ -16,10 +16,6 @@ const router = createBrowserRouter([
         index: true,
         element: <Dashboard />,
       },
-      // {
-      //   path: "movies",
-      //   element: <Movies />,
-      // },
     ],
   },
   {

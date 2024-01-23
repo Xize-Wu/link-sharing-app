@@ -23,9 +23,12 @@ export default function Landing() {
   );
 
   function handleSetAuthComponent(): void {
+    console.log("function triggered!")
     if (authComponent === "login") {
       setAuthCompnent("register");
+      console.log(authComponent)
     } else setAuthCompnent("login");
+    console.log(authComponent)
   }
 
   return (
@@ -38,8 +41,7 @@ export default function Landing() {
       ) : (
         <div>
           <LandingHeader />
-
-          <CreateAccount switchComponent={handleSetAuthComponent} />
+          <CreateAccount switchComponent={handleSetAuthComponent}/>
         </div>
       )}
     </StyledComponent>

@@ -27,7 +27,14 @@ type inputFieldsConfig = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }[];
 
-function Login() {
+interface LoginProps {
+  switchComponent: () => void;
+}
+
+
+function Login(child:LoginProps) {
+
+  const { switchComponent } = child;
   const dispatch = useDispatch();
 
   const [logininfo, setLogin] = useState<LoginState>({
@@ -103,8 +110,7 @@ function Login() {
       </MainButton>
       <div>
         <div>Don't have an account?</div>
-        {/* switchComponent */}
-        <div onClick={() => {}}>Create account</div>
+        <div onClick={switchComponent}>Create account</div>
       </div>
     </StyledContainer>
   );
